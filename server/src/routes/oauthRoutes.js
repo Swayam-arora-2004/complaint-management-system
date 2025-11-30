@@ -33,7 +33,7 @@ router.post('/google', async (req, res) => {
     // Find or create user
     let user = await User.findOne({ 
       $or: [
-        { email },
+        { email: email.toLowerCase() },
         { googleId }
       ]
     });
@@ -49,9 +49,10 @@ router.post('/google', async (req, res) => {
       // Create new user
       user = await User.create({
         name,
-        email,
+        email: email.toLowerCase(),
         googleId,
         authProvider: 'google',
+        role: 'user', // Default role
       });
     }
 
@@ -66,12 +67,21 @@ router.post('/google', async (req, res) => {
           id: user._id,
           name: user.name,
           email: user.email,
+          role: user.role || 'user',
         },
       },
     });
   } catch (error) {
     console.error('Google OAuth error:', error);
-    res.status(500).json({ ok: false, message: 'Server error' });
+    console.error('Error details:', {
+      message: error.message,
+      stack: error.stack,
+    });
+    res.status(500).json({ 
+      ok: false, 
+      message: error.message || 'Server error',
+      error: process.env.NODE_ENV === 'development' ? error.stack : undefined,
+    });
   }
 });
 
@@ -90,7 +100,7 @@ router.post('/apple', async (req, res) => {
     // Find or create user
     let user = await User.findOne({ 
       $or: [
-        { email },
+        { email: email.toLowerCase() },
         { appleId }
       ]
     });
@@ -106,9 +116,10 @@ router.post('/apple', async (req, res) => {
       // Create new user
       user = await User.create({
         name,
-        email,
+        email: email.toLowerCase(),
         appleId,
         authProvider: 'apple',
+        role: 'user', // Default role
       });
     }
 
@@ -123,6 +134,7 @@ router.post('/apple', async (req, res) => {
           id: user._id,
           name: user.name,
           email: user.email,
+          role: user.role || 'user',
         },
       },
     });
