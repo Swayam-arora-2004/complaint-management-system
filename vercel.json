@@ -1,9 +1,8 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "devCommand": "npm run dev",
-  "installCommand": "npm install",
+  "installCommand": "npm install --include=dev",
   "framework": "vite",
+  "outputDirectory": "dist",
   "rewrites": [
     {
       "source": "/(.*)",
@@ -11,4 +10,3 @@
     }
   ]
 }
-
