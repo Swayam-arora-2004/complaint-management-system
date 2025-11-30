@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: complaint-compass-api
+    env: node
+    plan: free
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5001
+      - key: MONGODB_URI
+        sync: false  # Set this manually in Render dashboard
+      - key: JWT_SECRET
+        sync: false  # Set this manually in Render dashboard
+      - key: FRONTEND_URL
+        sync: false  # Set this manually in Render dashboard (your Vercel URL)
+      - key: FROM_EMAIL
+        sync: false  # Optional: Set this manually in Render dashboard
+      - key: SMTP_HOST
+        sync: false  # Optional: Set this manually in Render dashboard
+      - key: SMTP_PORT
+        sync: false  # Optional: Set this manually in Render dashboard
+      - key: SMTP_USER
+        sync: false  # Optional: Set this manually in Render dashboard
+      - key: SMTP_PASS
+        sync: false  # Optional: Set this manually in Render dashboard
+

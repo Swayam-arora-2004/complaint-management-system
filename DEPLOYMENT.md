@@ -1,5 +1,7 @@
 # Deployment Guide
 
+> **Note**: This guide covers both Railway and Render. Render is recommended for easier setup.
+
 This guide will help you deploy the Complaint Management System to production.
 
 ## 🎯 Deployment Strategy
@@ -57,6 +59,7 @@ git push -u origin main
 1. Go to **Database Access** → **Add New Database User**
 2. Create username and password (save these!)
 3. Set privileges to **Read and write to any database**
+
 
 ### 2.3 Configure Network Access
 
